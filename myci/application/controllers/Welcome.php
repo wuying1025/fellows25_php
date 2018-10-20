@@ -25,11 +25,16 @@ class Welcome extends CI_Controller {
 
 	public function login(){
 		$this->load->view('login');
-
 	}
 
 	public function regist(){
 		$this->load->view('regist');
+
+	}
+	public function regist1(){
+		$name = $this->input->get('name');
+		$pwd1 = $this->input->get('pwd1');
+		echo $pwd1;
 
 	}
 
@@ -41,18 +46,27 @@ class Welcome extends CI_Controller {
 		$pwd1 = $this->input->post('pwd1');
 		$pwd2 = $this->input->post('pwd2');
 
-		$data = array(
-			'name_error' => '用户名不能为空'
-		);
-		//2.验证
 
+		//2.验证
+		$data = array();
+//		$flag = TRUE;
 		if($name == ''){
-			$this -> load->view('regist',$data);
-//			redirect("welcome/regist");
+			$data['name_error'] = "用户名不能为空";
+//			redirect("welcome/regist1?name=zs&pwd1=123");
+//			$flag = FALSE;
 		}
-		else{
+		if($pwd1 != $pwd2){
+			$data['pwd_error'] = '两次密码不一致';
+//			$flag = FALSE;
+		}
+
+		if(count($data) != 0){
+			$this -> load->view('regist',$data);
+		}else{
 			echo 'success';
 		}
+
+
 
 		//3.连接数据库
 

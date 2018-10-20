@@ -18,6 +18,7 @@
     </p>
     <p>
         密码: <input type="password" name="pwd1">
+        <span class="error"><?php echo isset($pwd_error)? $pwd_error:''?></span>
     </p>
     <p>
         确认密码: <input type="password" name="pwd2">
