@@ -48,7 +48,9 @@ class Welcome extends CI_Controller {
 
 
 		//2.验证
-		$data = array();
+		$data = array(
+			'name'=>$name
+		);
 //		$flag = TRUE;
 		if($name == ''){
 			$data['name_error'] = "用户名不能为空";
@@ -60,15 +62,26 @@ class Welcome extends CI_Controller {
 //			$flag = FALSE;
 		}
 
-		if(count($data) != 0){
+		if(count($data) > 1){
 			$this -> load->view('regist',$data);
 		}else{
-			echo 'success';
+
+			//3.连接数据库(加载model, 调用model里面的方法)
+
+			$this -> load ->model("User_model");
+
+			$rows = $this -> User_model -> save($name,$pwd1);
+
+			if($rows > 0){
+				echo 'success';
+			}else{
+				echo 'fail';
+			}
 		}
 
 
 
-		//3.连接数据库
+
 
 
 		//4.跳转页面
