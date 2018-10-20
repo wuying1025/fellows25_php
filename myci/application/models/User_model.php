@@ -17,4 +17,15 @@ class User_model extends CI_Model
         $query = $this->db->insert('t_user', $data);
         return $query;
     }
+
+    public function get_user_by_name_and_pwd($name,$password){
+
+        $query = $this->db->get_where('t_user',array(
+            'name'=>$name,
+            'password'=>$password
+        ));
+
+        return $query->row();
+//        return $query->result();
+    }
 }

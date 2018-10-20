@@ -84,11 +84,27 @@ class Welcome extends CI_Controller {
 
 
 
+
 		//4.跳转页面
 
 
 
 //		echo 'save...';
+	}
+
+	public function login_check(){
+		$name = $this -> input ->post('username');
+		$pwd = $this -> input ->post('pwd1');
+
+		$this->load->model('User_model');
+		
+		$result = $this->User_model->get_user_by_name_and_pwd($name,$pwd);
+		
+//		var_dump($result);
+		$this -> load ->view('welcome_message',array(
+			'user'=>$result
+		));
+
 	}
 
 //   http://localhost/myci/welcome/login
