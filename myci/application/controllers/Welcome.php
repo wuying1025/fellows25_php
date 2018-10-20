@@ -48,6 +48,10 @@ class Welcome extends CI_Controller {
 
 		if($name == ''){
 			$this -> load->view('regist',$data);
+//			redirect("welcome/regist");
+		}
+		else{
+			echo 'success';
 		}
 
 		//3.连接数据库
