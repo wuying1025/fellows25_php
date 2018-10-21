@@ -69,11 +69,11 @@
 
 	<div class='outline'>
 
-	  <span class='time'>发表于 <?php echo date('Y年m月d日 h:i');?></span>
+	  <span class='time'>发表于 <?php echo date('Y年m月d日 h:ia',strtotime($blog->post_time));?></span>
 
-	  <span class='catalog'>分类: <a href="?catalog=92334">工作日志</a></span>
+	  <span class='catalog'>分类: <a href="?catalog=92334"><?php echo $blog->catalog_name;?></a></span>
 
-	  <span class='stat'>统计: 0评/0阅</span>
+	  <span class='stat'>统计: <?php echo $blog->num;?>评/<?php echo $blog->checked;?>阅</span>
 
 	  	</div>
 
