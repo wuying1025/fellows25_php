@@ -99,16 +99,24 @@ class Welcome extends CI_Controller {
 		$this->load->model('User_model');
 		
 		$result = $this->User_model->get_user_by_name_and_pwd($name,$pwd);
-		
+
+		//将用户信息存到session里面
+		$this->session->set_userdata('user',$result);
+
 //		var_dump($result);
 		$this -> load ->view('welcome_message',array(
-			'user'=>$result
+			'age'=> 13
 		));
 
+	}
+	public function detail(){
+		$this -> load ->view('detail');
 	}
 
 //   http://localhost/myci/welcome/login
 
 //   http://localhost/项目名/控制器名/方法名
+// session
+
 
 }
