@@ -23,7 +23,7 @@ class Blog_model extends CI_Model
 (select count(*) from t_comment tc where tc.blog_id = b.blog_id) num
  from t_blog b,t_blog_catalog c
 where b.catalog_id = c.catalog_id
-group by b.post_time";
+order by b.post_time desc";
 
         $query = $this->db->query($sql);
         return  $query->result();
