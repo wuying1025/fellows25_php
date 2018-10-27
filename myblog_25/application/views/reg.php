@@ -31,7 +31,7 @@
 </style>
 
 <div class="MainForm" id="reg_page">
-<form id="frm_reg" action="" method="POST" style="float:left; width:620px;">
+<form id="frm_reg" action="" method="POST" style="float:left; width:620px;" onsubmit="return false;">
     <h2>申请<span style="color: #006600;"> SYSIT Blog</span> 账号，已经申请的请点击<a href="login.htm">这里</a>登录</h2>
     <div id="error_msg" class="error_msg" style="display:none"></div>
 	<table cellpadding="0" cellspacing="0">
@@ -63,7 +63,7 @@
     		<td>
 				<input name="gender" value="1" id="gender_1" type="radio"><label for="gender_1">男</label>&nbsp;&nbsp;&nbsp;
 				<input name="gender" value="2" id="gender_2" type="radio"><label for="gender_2">女</label>
-				<span class="nodisp">请选择性别</span>
+				<span class="nodisp" id="sex_msg">请选择性别</span>
 			</td>	
         </tr>
     	<tr id="tr_area">
@@ -112,15 +112,15 @@
     	<tr>
     		<th>验证码：</th>		
     		<td><input id="f_vcode" name="verifyCode" size="6" class="TEXT" type="text">
-			<span><a href="javascript:_rvi()">换另外一个图</a></span>
+			<span><a href="javascript:;" id="change_img">换另外一个图</a></span>
 			</td>
     	</tr>
 		<tr>
     		<th>&nbsp;</th>		
-			<td>
-			<img id="img_vcode" alt="..." src="images/captcha.png" style="border: 2px solid rgb(204, 204, 204);" align="absmiddle">
-            <script language="javascript">function _rvi(){document.getElementById('img_vcode').src = '/action/user/captcha?t='+Math.random(1000);}</script>
+			<td id="captcha_img">
+				<?php echo $captcha;?>
 			</td>
+			<span id="code_msg"> </span>
 		</tr>
     	<tr class="buttons">
     		<th>&nbsp;</th>		
@@ -168,7 +168,57 @@
 		},'text')
 
 
+	});
+	$('#change_img').on('click',function(){
+
+		$.get('welcome/get_captcha',function(data){
+			$('#captcha_img').html(data);
+		},'text');
 	})
+
+
+
+	$('.SUBMIT').on('click',function(){
+		var name = $('#f_name').val();
+		var pwd = $('#f_pwd').val();
+		var flag = true;
+		if(name == '') {
+			$('#name_msg').html('姓名不能为空');
+			flag = false;
+		}
+		if(pwd == ''){
+			$('#password_msg').html('密码不能为空');
+			flag = false;
+		}
+
+		if(flag){
+			var email = $('#f_email').val();
+			var sex = $('[name=gender]:checked').val();
+			var code = $('#f_vcode').val();
+			$.get('welcome/save',{
+				email:email,
+				name:name,
+				pwd:pwd,
+				sex:sex,
+				code:code
+			},function (data) {
+				if(data == 'success'){
+					location.href = 'welcome/login';
+				}else if(data == 'code_error'){
+					$('#code_msg').html('验证码错误');
+				}else if(data=='sex_error'){
+					//.......
+					$('#sex_msg').html('请选择性别');
+					$('#sex_msg').show();
+				}
+			},'text');
+
+		}
+
+	});
+	$('#f_name').on('focus',function(){
+		$('#name_msg').html('');
+	});
 
 
 
