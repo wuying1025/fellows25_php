@@ -25,6 +25,20 @@ class Welcome extends CI_Controller {
 	public function login(){
 		$this->load->view('login');
 	}
+	public function check_login(){
+		$email = $this->input->post('email');
+		$pwd = $this->input->post('pwd');
+		$user = $this->User_model->check_login($email,$pwd);
+
+		if($user){
+			$this->session->set_userdata('user',$user);
+		}
+
+		$this->load->view('index_logined');
+
+
+
+	}
 	public function save(){
 		$email = $this->input->get('email');
 		$name = $this->input->get('name');

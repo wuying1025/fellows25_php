@@ -32,7 +32,7 @@
 
 <div class="MainForm" id="reg_page">
 <form id="frm_reg" action="" method="POST" style="float:left; width:620px;" onsubmit="return false;">
-    <h2>申请<span style="color: #006600;"> SYSIT Blog</span> 账号，已经申请的请点击<a href="login.htm">这里</a>登录</h2>
+    <h2>申请<span style="color: #006600;"> SYSIT Blog</span> 账号，已经申请的请点击<a href="welcome/login">这里</a>登录</h2>
     <div id="error_msg" class="error_msg" style="display:none"></div>
 	<table cellpadding="0" cellspacing="0">
     	<tbody><tr id="tr_email">

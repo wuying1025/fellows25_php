@@ -28,6 +28,18 @@ class User_model extends CI_Model
         return $query->result();
 //        return $query->result();
     }
+    //check_login
+    public function check_login($email,$pwd){
+
+        $query = $this->db->get_where('t_user',array(
+            'email'=>$email,
+            'password'=>$pwd
+        ));
+
+        return $query->row();
+//        return $query->result();
+    }
+
 
     public function get_user_by_name_and_pwd($name,$password){
 
