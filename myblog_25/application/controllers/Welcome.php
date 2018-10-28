@@ -62,6 +62,13 @@ class Welcome extends CI_Controller {
 
 
 	}
+	//退出
+	public function logout(){
+
+		$this->session->unset_userdata('user');
+		$this->load->view('login');
+
+	}
 
 	public function captcha(){
 		//先获取验证码

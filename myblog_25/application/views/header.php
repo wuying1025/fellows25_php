@@ -11,7 +11,13 @@
 <div id="OSC_Topbar">
     <div id="VisitorInfo">
         当前访客身份：
-        <?php echo $user->name;?> [ <a href="index.htm">退出</a> ]
+        <?php if(isset($user)){
+            echo $user->name;
+            echo "[ <a href='welcome/logout'>退出</a> ]";
+         }else{ ?>
+        游客 [ <a href="welcome/login">登录</a> | <a href="welcome/reg">注册</a> ]
+        <?php }?>
+
 				<span id="OSC_Notification">
 			<a href="inbox.htm" class="msgbox" title="进入我的留言箱">你有<em>0</em>新留言</a>
 																				</span>
