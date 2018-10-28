@@ -24,47 +24,34 @@
 <div id="OSC_Screen"><!-- #BeginLibraryItem "/Library/OSC_Banner.lbi" -->
 <?php include 'header.php'?>
 <div class="BlogList">
-<ul>
-  <li class="Blog" id="blog_24027">
-	<h2 class="BlogAccess_true BlogTop_0"><a href="viewPost_comment.htm">测试文章3</a></h2>
-	<div class="outline">
-	  <span class="time">发表于 2011年06月18日 0:34</span>
-	  <span class="catalog">分类: <a href="#">工作日志</a></span>
-	  <span class="stat">统计: 1评/4阅</span>
-	  	  <span class="blog_admin">( <a href="newBlog.htm">修改</a> | <a href="javascript:delete_blog(24027)">删除</a> )</span>	  
-	  	</div>
-		<div class="TextContent" id="blog_content_24027">
-				测试文章3
-		<div class="fullcontent"><a href="viewPost_comment.htm">阅读全文...</a></div>
-			</div>
-	  </li>
-  <li class="Blog" id="blog_24026">
-	<h2 class="BlogAccess_true BlogTop_0"><a href="viewPost_logined.htm">测试文章2</a></h2>
-	<div class="outline">
-	  <span class="time">发表于 2011年06月17日 23:06</span>
-	  <span class="catalog">分类: <a href="#">工作日志</a></span>
-	  <span class="stat">统计: 2评/12阅</span>
-	  	  <span class="blog_admin">( <a href="newBlog.htm">修改</a> | <a href="javascript:delete_blog(24026)">删除</a> )</span>	  
-	  	</div>
-		<div class="TextContent" id="blog_content_24026">
-				测试文章1
-		<div class="fullcontent"><a href="viewPost_logined.htm">阅读全文...</a></div>
-			</div>
-	  </li>
-  <li class="Blog" id="blog_24025">
-	<h2 class="BlogAccess_true BlogTop_0"><a href="viewPost.htm">测试文章1</a></h2>
-	<div class="outline">
-	  <span class="time">发表于 2011年06月17日 23:04</span>
-	  <span class="catalog">分类: <a href="#">工作日志</a></span>
-	  <span class="stat">统计: 0评/5阅</span>
-	  	  <span class="blog_admin">( <a href="newBlog.htm">修改</a> | <a href="javascript:delete_blog(24025)">删除</a> )</span>	  
-	  	</div>
-		<div class="TextContent" id="blog_content_24025">
-				<b>测试文章1</b>
-		<div class="fullcontent"><a href="viewPost.htm">阅读全文...</a></div>
-			</div>
-	  </li>
-</ul>
+	<ul>
+		<?php foreach ($blogs as $blog){ ?>
+			<li class='Blog' id='blog_<?php echo $blog->blog_id;?>'>
+
+				<h2 class='BlogAccess_true BlogTop_0'><a href="viewPost_comment.htm"><?php echo $blog->blog_title;?></a></h2>
+
+				<div class='outline'>
+
+					<span class='time'>发表于 <?php echo date('Y年m月d日 h:ia',strtotime($blog->post_time));?></span>
+
+					<span class='catalog'>分类: <a href="?catalog=92334"><?php echo $blog->catalog_name;?></a></span>
+
+					<span class='stat'>统计: <?php echo $blog->num;?>评/<?php echo $blog->checked;?>阅</span>
+
+				</div>
+
+				<div class='TextContent' id='blog_content_<?php echo $blog->blog_id;?>'>
+
+					<?php echo $blog->blog_content;?>
+
+					<div class='fullcontent'><a href="viewPost_comment.htm">阅读全文...</a></div>
+
+				</div>
+
+			</li>
+		<?php }?>
+
+	</ul>
 <div class="clear"></div>
 	</div>
 <div class="BlogMenu"><div class="admin SpaceModule">
@@ -88,7 +75,7 @@
   <strong>最新网友评论</strong>
       <ul>
 		<li>
-		<span class="u"><a href="#"><img src="images/portrait.gif" alt="Johnny" title="Johnny" class="SmallPortrait" user="154693" align="absmiddle"></a></span>
+		<span class="u"><a href="welcome/blog_list"><img src="images/portrait.gif" alt="Johnny" title="Johnny" class="SmallPortrait" user="154693" align="absmiddle"></a></span>
 		<span class="c">hoho
 			<span class="t">发布于 11分钟前 <a href="viewPost_comment.htm">查看»</a></span>
 		</span>

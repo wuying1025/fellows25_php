@@ -32,13 +32,24 @@ class Welcome extends CI_Controller {
 
 		if($user){
 			$this->session->set_userdata('user',$user);
+			redirect('welcome/blog_list');
 		}
 
-		$this->load->view('index_logined');
+	}
 
+	public function blog_list(){
+		$id = $this->session->userdata('user')->id;
 
+		//查数据库  调用model
+		$blogs = $this->Blog_model->get_blog_list_by_id($id);
+
+		$this->load->view('index_logined',array(
+			'blogs'=>$blogs
+		));
 
 	}
+
+
 	public function save(){
 		$email = $this->input->get('email');
 		$name = $this->input->get('name');
@@ -66,7 +77,7 @@ class Welcome extends CI_Controller {
 	public function logout(){
 
 		$this->session->unset_userdata('user');
-		$this->load->view('login');
+		redirect('welcome/login');
 
 	}
 

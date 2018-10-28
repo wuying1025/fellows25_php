@@ -32,7 +32,7 @@
     <div class="clear"></div>
 </div>
 <div id="OSC_Content"><div class="SpaceChannel">
-        <div id="portrait"><a href="adminIndex.htm"><img src="images/portrait.gif" alt="Johnny" title="Johnny" class="SmallPortrait" user="154693" align="absmiddle"></a></div>
+        <div id="portrait"><a href="welcome/blog_list"><img src="images/portrait.gif" alt="Johnny" title="Johnny" class="SmallPortrait" user="154693" align="absmiddle"></a></div>
         <div id="lnks">
             <strong>Johnny的博客</strong>
             <div><a href="index_logined.htm">TA的博客列表</a>&nbsp;|

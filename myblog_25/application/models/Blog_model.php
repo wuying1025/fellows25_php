@@ -32,4 +32,15 @@ order by b.post_time desc";
         $query = $this->db->get('t_blog_catalog');
         return $query->result();
     }
+
+    public function get_blog_list_by_id($id){
+        $sql = "select *,
+(select count(*) from t_comment tc where tc.blog_id = b.blog_id) num
+ from t_blog b,t_blog_catalog c
+where b.catalog_id = c.catalog_id and b.user_id = $id
+order by b.post_time desc";
+
+        $query = $this->db->query($sql);
+        return  $query->result();
+    }
 }
