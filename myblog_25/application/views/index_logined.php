@@ -28,7 +28,7 @@
 		<?php foreach ($blogs as $blog){ ?>
 			<li class='Blog' id='blog_<?php echo $blog->blog_id;?>'>
 
-				<h2 class='BlogAccess_true BlogTop_0'><a href="viewPost_comment.htm"><?php echo $blog->blog_title;?></a></h2>
+				<h2 class='BlogAccess_true BlogTop_0'><a href="welcome/blog_detail/<?php echo $blog->blog_id;?>"><?php echo $blog->blog_title;?></a></h2>
 
 				<div class='outline'>
 
@@ -50,6 +50,7 @@
 
 			</li>
 		<?php }?>
+		
 
 	</ul>
 <div class="clear"></div>

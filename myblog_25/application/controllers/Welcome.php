@@ -36,6 +36,17 @@ class Welcome extends CI_Controller {
 		}
 
 	}
+	public function blog_detail($blog_id){
+
+		$blog = $this->Blog_model->get_blog_by_id($blog_id);
+
+		$blog->post_time = $this->time_tran($blog->post_time);
+
+		$this->load->view('viewPost_comment',array(
+			'blog'=>$blog
+		));
+		
+	}
 
 	public function blog_list(){
 		$id = $this->session->userdata('user')->id;
@@ -79,6 +90,36 @@ class Welcome extends CI_Controller {
 		$this->session->unset_userdata('user');
 		redirect('welcome/login');
 
+	}
+
+
+	public function time_tran($the_time)
+	{
+		$now_time = date("Y-m-d H:i:s", time() + 8 * 60 * 60);
+		$now_time = strtotime($now_time);
+		$show_time = strtotime($the_time);
+		$dur = $now_time - $show_time;
+		if ($dur < 0) {
+			return $the_time;
+		} else {
+			if ($dur < 60) {
+				return $dur . '秒前';
+			} else {
+				if ($dur < 3600) {
+					return floor($dur / 60) . '分钟前';
+				} else {
+					if ($dur < 86400) {
+						return floor($dur / 3600) . '小时前';
+					} else {
+						if ($dur < 259200) {//3天内
+							return floor($dur / 86400) . '天前';
+						} else {
+							return $the_time;
+						}
+					}
+				}
+			}
+		}
 	}
 
 	public function captcha(){

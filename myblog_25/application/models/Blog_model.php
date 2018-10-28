@@ -43,4 +43,18 @@ order by b.post_time desc";
         $query = $this->db->query($sql);
         return  $query->result();
     }
+
+    public function get_blog_by_id($blog_id){
+
+//        return $this->db->get_where('t_blog',array(
+//            'blog_id'=>$blog_id
+//        ))->row();
+
+        $sql = "select *,(select count(*) from t_comment c where c.blog_id = b.blog_id) num,
+        (select count(*) from t_collect tc where tc.blog_id = b.blog_id) cnum
+                from t_blog b where b.blog_id = $blog_id";
+
+        $query = $this->db->query($sql);
+        return  $query->row();
+    }
 }
