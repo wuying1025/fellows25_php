@@ -38,22 +38,46 @@ class Welcome extends CI_Controller {
 	}
 	public function blog_detail($blog_id){
 
+		$my_blogs = $this->get_blog_list();
+
+		$comments = $this->Blog_model->get_comment_by_blogid($blog_id);
+
 		$blog = $this->Blog_model->get_blog_by_id($blog_id);
 
 		$blog->post_time = $this->time_tran($blog->post_time);
 
+		$next = null;
+		$prev = null;
+		foreach ($my_blogs as $index=>$my_blog){
+			if($my_blog->blog_id == $blog->blog_id){
+				if($index > 0){
+					$prev = $my_blogs[$index - 1];
+				}
+				if($index < count($my_blogs)-1){
+					$next = $my_blogs[$index + 1];
+				}
+			}
+		}
+
 		$this->load->view('viewPost_comment',array(
-			'blog'=>$blog
+			'blog'=>$blog,
+			'prev'=>$prev,
+			'next'=>$next,
+			'comments'=>$comments
 		));
 		
 	}
 
-	public function blog_list(){
+	private function get_blog_list(){
 		$id = $this->session->userdata('user')->id;
-
 		//查数据库  调用model
 		$blogs = $this->Blog_model->get_blog_list_by_id($id);
+		return $blogs;
+	}
 
+	public function blog_list(){
+
+		$blogs = $this->get_blog_list();
 		$this->load->view('index_logined',array(
 			'blogs'=>$blogs
 		));

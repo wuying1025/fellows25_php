@@ -36,11 +36,19 @@
   <div class="BlogContent TextContent"><?php echo $blog->blog_content;?></div>
       <div class="BlogLinks">
 	<ul>
-          <li>上篇 <span>(<?php echo $blog->post_time;?>)</span>：<a href="viewPost_logined.htm" class="prev">测试文章2</a></li>            	</ul>
+		<?php if(isset($prev)){ ?>
+			<li>上篇 <span>(<?php echo $prev->post_time;?>)</span>：<a href="welcome/blog_detail/<?php echo $prev->blog_id;?>" class="prev"><?php echo $prev->blog_title;?></a></li>
+		<?php }
+			if(isset($next)){
+		?>
+          <li>下篇 <span>(<?php echo $next->post_time;?>)</span>：<a href="welcome/blog_detail/<?php echo $next->blog_id;?>" class="prev"><?php echo $next->blog_title;?></a></li>
+		<?php }?>
+	</ul>
   </div>
     <div class="BlogComments">
     <h2><a name="comments" href="#postform" class="opts">发表评论»</a>共有 <?php echo $blog->num;?> 条网友评论</h2>
 			<ul id="BlogComments">
+				<?php foreach ($comments as $comment){?>
 	<li id='cmt_24027_154693_261665734'>
 
 	<div class='portrait'>
@@ -53,9 +61,9 @@
 
 		<div class='title'>
 
-			sw0411 发表于 2011-06-18 00:37</div>
+			<?php echo $comment->name;?> 发表于 <?php echo $comment->post_time;?></div>
 
-		<div class='post'>hoho</div>
+		<div class='post'><?php echo $comment->content;?></div>
 
 		<div id='inline_reply_of_24027_154693_261665734' class='inline_reply'></div>
 
@@ -63,7 +71,9 @@
 
 	<div class='clear'></div>
 
-</li>	</ul>
+	</li>	
+			<?php }?>
+			</ul>
 		  </div>  
   <div class="CommentForm">
     <a name="postform"></a>
